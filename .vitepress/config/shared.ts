@@ -4,6 +4,10 @@ import { defineConfig } from 'vitepress'
 export const shared = defineConfig({
     //网页标题
     title: 'Git Repo Sync',
+    //网页地图
+    sitemap: {
+        hostname: 'https://gitreposync.blazesnow.com/'
+    },
     //头文件配置
     head: [
         //网页logo
