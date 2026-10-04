@@ -19,9 +19,9 @@ The repository is missing its `origin` source URL, or has no backup-target remot
 - Unconfigured repositories do not participate in syncing (skipped by "Start Sync" and rejected by the MCP `sync_repo` tool), avoiding guaranteed "failed" records
 - Add a remote inside the repository (`git remote add <name> <url>`) and the app registers it as a backup target automatically
 
-## Does deleting a repository delete the local directory?
+## How do I stop registering a repository?
 
-No. Deleting is a **soft delete**: the entry is hidden and its targets cleared, while the directory in the base directory is left untouched; it will not be rediscovered by auto discovery either.
+Move the repository directory out of the base directory — registration simply follows the directories inside it, so auto discovery no longer registers it, and the repository itself is untouched. The app has no delete entry: repository configuration is read-only (since v1.0.0-beta.6), the source and backup targets are derived from `.git/config`, and remotes are managed with git commands.
 
 ## How does "Keep me signed in for 30 days" work?
 

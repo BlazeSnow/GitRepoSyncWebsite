@@ -35,7 +35,7 @@ features:
     details: 界面语言可切换（简体中文 / English），深浅色跟随系统或手动指定
   - icon: 🤖
     title: Agent 接入
-    details: 内置 MCP 服务，Agent 可直接管理仓库并触发同步
+    details: 内置 MCP 服务，Agent 可查询仓库、触发与停止同步
   - icon: 🖥️
     title: 跨平台
     details: 支持 Windows、macOS（Apple Silicon / Intel）与 Linux

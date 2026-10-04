@@ -35,7 +35,7 @@ features:
     details: UI language switchable (简体中文 / English); dark mode follows the system or can be set manually
   - icon: 🤖
     title: Agent Access
-    details: Built-in MCP server lets AI agents manage repositories and trigger syncs directly
+    details: Built-in MCP server lets AI agents inspect repositories and trigger or stop syncs directly
   - icon: 🖥️
     title: Cross-Platform
     details: Available on Windows, macOS (Apple Silicon / Intel) and Linux

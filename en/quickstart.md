@@ -36,24 +36,22 @@ Every repository lives at `{base directory}/{repo name}` and acts as the relay f
 Clone or move the repositories you want to back up into the base directory — the app **discovers and registers them automatically** on launch:
 
 - The `origin` remote becomes the **source**
-- **Every other remote is registered as a backup target** (gitee / gitlab / custom names, 1-to-many)
+- **Every other remote is registered as a backup target** (gitee / gitlab / custom names, 1-to-many; the reserved name `upstream` is excluded, so a fork's upstream remote is never pushed back to)
 - A repository without any extra remote is marked "unconfigured" until you add one
 
-Afterwards, remotes you add or remove inside the repository follow automatically — no manual list maintenance.
-
-You can also register repositories manually via "Add Repository" without touching the base directory.
+Repository configuration is **read-only**: the source and backup targets are derived entirely from `.git/config`, and remotes are managed by you with git — run `git remote add <name> <url>` / `git remote remove <name>` inside the repository and the backup list follows automatically; the app never manages repository configuration for you.
 
 ## Start Syncing
 
-On the **Sync Repositories** page pick a range (all / stale within 1 / 3 / 7 / 30 days) and click **Start Sync**:
+On the **Sync Repositories** page pick a range (all / configured / stale within 1 / 3 / 7 / 30 days) and click **Start Sync**:
 
 - Each sync pushes to every backup target in turn, each with its own status
 - One failing target does not affect the others
-- While syncing, click **Stop Sync** to terminate running and queued syncs
+- While syncing, click **Stop Sync** to terminate running and queued syncs (effective across processes)
 
-Double-click or right-click a table row to edit a repository; the context menu also offers "Sync Now" and "Delete".
+Double-click or right-click a table row to open a **read-only detail dialog** (the source and backup-target list — to change them, run git commands yourself); the context menu also offers "Open Folder" and "Sync Now".
 
 ## Next Steps
 
 - Learn [how syncing works](/en/sync): the three-step pipeline and how LFS and submodules are handled
-- Let an AI agent manage repositories via [Agent Access (MCP)](/en/mcp)
+- Let an AI agent inspect repositories and trigger or stop syncs via [Agent Access (MCP)](/en/mcp)

@@ -35,8 +35,8 @@ For each backup target:
 
 ## Reliability Guarantees
 
-- Every network git command has a timeout (default 1800s, LFS 3600s) and an HTTP low-speed abort (120s stall kills it); timeouts and "Stop Sync" kill the child process
-- Repositories sync **serially** (an internal queue) so parallel fetches do not fight over the network
+- Every network git command has a timeout (default 1800s, LFS 3600s) and an HTTP low-speed abort (120s stall kills it); timeouts and "Stop Sync" kill the child process — stop requests travel through SQLite across processes, so they work from any window (GUI or agent)
+- Single sync executor (daemon role): both the GUI and MCP can start syncs; tasks are delivered through a SQLite queue and consumed **serially** by the one executor (elected via a `sync-daemon.lock` file) — parallel fetches never fight over the network and two pipelines never touch the same relay directory; queued tasks persist across processes and still run after the initiating process exits
 - `GIT_TERMINAL_PROMPT=0` during syncs prevents private repositories from blocking on interactive prompts
 - GUI-launched processes often inherit a minimal PATH (especially macOS launched from Finder); the app appends common install locations (Homebrew / MacPorts / Linuxbrew) so git-lfs is not falsely reported as missing
 - LFS objects always travel over the HTTPS LFS protocol: even SSH targets negotiate to their HTTPS LFS endpoint; a pre-upload auth failure is recorded as a warning for that target (the push is still attempted) — configure a credential helper or switch to an HTTPS URL
